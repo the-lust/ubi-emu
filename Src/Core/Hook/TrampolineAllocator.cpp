@@ -1,5 +1,6 @@
 #include "TrampolineAllocator.hpp"
 #include <windows.h>
+#include <algorithm>
 
 namespace Uues::Core::Hook {
 

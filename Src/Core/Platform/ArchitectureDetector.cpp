@@ -8,7 +8,7 @@ Architecture ArchitectureDetector::GetCurrentArchitecture() {
     return Architecture::X64;
 #elif _WIN32
     BOOL IsWow = FALSE;
-    if (IsWow64Process(GetCurrentProcess(), &IsWow) && IsWow) {
+    if (::IsWow64Process(GetCurrentProcess(), &IsWow) && IsWow) {
         return Architecture::X64;
     }
     return Architecture::X86;
