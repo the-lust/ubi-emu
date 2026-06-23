@@ -1,12 +1,14 @@
-you know how there's like a million different ubisoft emulator projects and each one only supports one specific version of uplay and they all have different config formats and none of them talk to each other
+you know how there's like alot of different ubisoft emulator projects and each one only supports one specific version of uplay and they all have different config formats and none of them talk to each other
 
-yeah i got tired of maintaining five separate forks so i smashed them together into one thing
+yeah i got tired of choosing from five separate forks so i smashed them together into one thing
 
 right now it covers uplay_r1 (the old one from ac2/farcry3 era), uplay_r2 (newer stuff like valhalla), upc (ubisoft connect), ubiorbit (driver san francisco etc), and dbdata (the denuvo activation thing). each one builds as its own dll from the same source tree so fixes in the core library apply to all of them.
 
 build it like any cmake project:
-  cmake -B Build
+  ```
+cmake -B Build
   cmake --build Build --config Release
+```
 
 drop the right dll + Ubi.ini next to your game exe and it should just work. if it doesn't, check the docs folder or file an issue.
 
