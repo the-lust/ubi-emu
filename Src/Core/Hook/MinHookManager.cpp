@@ -1,6 +1,7 @@
 #include "MinHookManager.hpp"
 #include <MinHook.h>
 #include "Log/Logger.hpp"
+#include <algorithm>
 
 namespace Uues::Core::Hook {
 
