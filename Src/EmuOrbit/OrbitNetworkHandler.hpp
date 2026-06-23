@@ -2,9 +2,19 @@
 
 #include "../Core/Common/Types.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuOrbit_EXPORTS
+        #define EMUORBIT_API __declspec(dllexport)
+    #else
+        #define EMUORBIT_API
+    #endif
+#else
+    #define EMUORBIT_API
+#endif
+
 namespace Uues::EmuOrbit {
 
-class OrbitNetworkHandler {
+class EMUORBIT_API OrbitNetworkHandler {
 public:
     static bool Connect(const Core::Common::String& Host, unsigned short Port);
     static bool Disconnect();

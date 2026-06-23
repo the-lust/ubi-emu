@@ -2,9 +2,19 @@
 
 #include "../Core/Config/EmulatorConfig.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuOrbit_EXPORTS
+        #define EMUORBIT_API __declspec(dllexport)
+    #else
+        #define EMUORBIT_API
+    #endif
+#else
+    #define EMUORBIT_API
+#endif
+
 namespace Uues::EmuOrbit {
 
-class OrbitStateManager {
+class EMUORBIT_API OrbitStateManager {
 public:
     static OrbitStateManager& GetInstance();
     void SetAppId(int AppId);
