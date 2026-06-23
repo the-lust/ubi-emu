@@ -5,7 +5,7 @@
 
 namespace Uues::Shared {
 
-class EmulatorBase : public EmulatorInterface {
+class EMUSHARED_API EmulatorBase : public EmulatorInterface {
 public:
     EmulatorBase();
     ~EmulatorBase() override;

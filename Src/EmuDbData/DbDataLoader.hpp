@@ -2,9 +2,19 @@
 
 #include "../Shared/EmulatorInterface.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuDbData_EXPORTS
+        #define EMUDBDATA_API __declspec(dllexport)
+    #else
+        #define EMUDBDATA_API __declspec(dllimport)
+    #endif
+#else
+    #define EMUDBDATA_API
+#endif
+
 namespace Uues::EmuDbData {
 
-class DbDataLoader : public Shared::EmulatorInterface {
+class EMUDBDATA_API DbDataLoader : public Shared::EmulatorInterface {
 public:
     bool Initialize() override;
     bool Shutdown() override;

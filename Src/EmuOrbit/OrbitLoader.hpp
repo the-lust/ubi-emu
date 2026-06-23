@@ -2,9 +2,19 @@
 
 #include "../Shared/EmulatorInterface.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuOrbit_EXPORTS
+        #define EMUORBIT_API __declspec(dllexport)
+    #else
+        #define EMUORBIT_API __declspec(dllimport)
+    #endif
+#else
+    #define EMUORBIT_API
+#endif
+
 namespace Uues::EmuOrbit {
 
-class OrbitLoader : public Shared::EmulatorInterface {
+class EMUORBIT_API OrbitLoader : public Shared::EmulatorInterface {
 public:
     bool Initialize() override;
     bool Shutdown() override;

@@ -2,11 +2,21 @@
 
 #include "../Core/Common/Types.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuShared_EXPORTS
+        #define EMUSHARED_API __declspec(dllexport)
+    #else
+        #define EMUSHARED_API __declspec(dllimport)
+    #endif
+#else
+    #define EMUSHARED_API
+#endif
+
 namespace Uues::Shared {
 
 // Interface version: v1 (stable, used since UUES 1.0)
 // If we ever break ABI we'll bump this; for now all emulators implement v1
-class EmulatorInterface {
+class EMUSHARED_API EmulatorInterface {
 public:
     virtual ~EmulatorInterface() = default;
     virtual bool Initialize() = 0;

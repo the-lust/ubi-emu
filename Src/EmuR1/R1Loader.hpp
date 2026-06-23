@@ -2,9 +2,19 @@
 
 #include "../Shared/EmulatorInterface.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuR1_EXPORTS
+        #define EMUR1_API __declspec(dllexport)
+    #else
+        #define EMUR1_API __declspec(dllimport)
+    #endif
+#else
+    #define EMUR1_API
+#endif
+
 namespace Uues::EmuR1 {
 
-class R1Loader : public Shared::EmulatorInterface {
+class EMUR1_API R1Loader : public Shared::EmulatorInterface {
 public:
     bool Initialize() override;
     bool Shutdown() override;

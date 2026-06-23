@@ -1,6 +1,7 @@
 #include "OwnershipListBuilder.hpp"
 #include "ShaHasher.hpp"
 #include "../Common/GuidGenerator.hpp"
+#include <algorithm>
 #include <sstream>
 
 namespace Uues::Core::Crypto {
@@ -8,7 +9,7 @@ namespace Uues::Core::Crypto {
 OwnershipListBuilder::OwnershipListBuilder() {}
 
 void OwnershipListBuilder::AddDlc(const Common::String& DlcId) {
-    if (std::find(mDlcs.begin(), mDlcs.end(), DlcId) == mDlcs.end()) {
+    if (std::find<Common::StringList::const_iterator, Common::String>(mDlcs.begin(), mDlcs.end(), DlcId) == mDlcs.end()) {
         mDlcs.push_back(DlcId);
     }
 }

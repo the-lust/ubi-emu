@@ -17,10 +17,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: ilammy/msvc-dev-cmd@v1
-
     - name: Configure CMake
-      run: cmake -B Build -G "Visual Studio 17 2022" -A ${{ matrix.arch }}
+      run: cmake -B Build -G "Visual Studio 17 2022" -A ${{ matrix.arch }} -T host=x64
 
     - name: Build
       run: cmake --build Build --config Release

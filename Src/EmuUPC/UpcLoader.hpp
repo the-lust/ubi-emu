@@ -2,9 +2,19 @@
 
 #include "../Shared/EmulatorInterface.hpp"
 
+#ifdef _WIN32
+    #ifdef EmuUPC_EXPORTS
+        #define EMUUPC_API __declspec(dllexport)
+    #else
+        #define EMUUPC_API __declspec(dllimport)
+    #endif
+#else
+    #define EMUUPC_API
+#endif
+
 namespace Uues::EmuUPC {
 
-class UpcLoader : public Shared::EmulatorInterface {
+class EMUUPC_API UpcLoader : public Shared::EmulatorInterface {
 public:
     bool Initialize() override;
     bool Shutdown() override;
