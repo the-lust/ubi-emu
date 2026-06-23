@@ -1,14 +1,17 @@
 # UUES — Unified Ubisoft Emulator Suite
 
-A modular framework that replaces five different Ubisoft DRM modules with a single unified emulator. Each emulator builds as its own DLL from the same shared core library, so a fix in `LibUbi` applies to all of them.
+it is a modular framework that replaces five different ubisoft modules with a single unified emulator. Each emulator builds as its own DLL from the same shared core library, so a fix in `LibUbi` applies to all of them.
 
-**Covers:** Uplay R1 (AC2, Far Cry 3 era), Uplay R2 (Valhalla, newer titles), Ubisoft Connect (UPC), Orbit (Driver: SF, older DRM), and DbData (Denuvo ticket/token activation).
+**Covers:** Uplay R1 (AC2, Far Cry 3 era), Uplay R2 (Valhalla, newer titles), Ubisoft Connect (UPC), Orbit (Driver: SF), and DbData (ticket/token activation).
 
 ---
 
+
+
+
 ## Quick Start
 
-1. **Pick the right DLL** for your game and drop it in the game folder next to the `.exe`:
+1. **Pick the right DLL** for ur game and drop it in the game folder next to the game binaary:
 
 | Emulator | DLL | Targets |
 |----------|-----|---------|
@@ -28,13 +31,13 @@ UnlockAllDlc=true
 OfflineMode=true
 ```
 
-3. **Launch the game.** The DLL hooks into the game's import table and serves fake responses so the game thinks Ubisoft services are running.
+3. **Launch the game.** th DLL hooks into the gams import table and serves fake responses so the game thinks Ubisoft services are running.
 
 ---
 
 ## Ubi.ini Reference
 
-A single `Ubi.ini` drives all five emulators. Each emulator only reads the sections it needs.
+ single `Ubi.ini` drives all five emulators, Each emu only reads the sections it needs.
 
 ### [Settings]
 | Key | Default | Description |
@@ -104,13 +107,13 @@ Lines starting with `;` or `#` are comments.
 
 ## Activation / Tickets / Tokens
 
-Some newer Denuvo-secured games require a valid ticket and token chain before they unlock DLC content. The DbData emulator handles this with two approaches:
+Some newergames require a valid ticket and token chain before startng. The DbData emulator handles this with two approaches:
 
 ### Automatic ticket generation
-Set `UnlockAllDlc=true` in `[Settings]` and the emulator generates a signed ticket internally using its built-in RSA key. Most single-player games work this way without extra files.
+Set `UnlockAllDlc=true` in `[Settings]` and the emulator generates a signed ticket internally using its built in RSA key. Most sgames work this way without extra file
 
 ### External token file
-Some games verify the token against platform-specific data and reject auto-generated tokens. For these titles, point `TokenFile` in `[Ticket]` to a `Token.ini` with tokens extracted from a legitimate install:
+Some games verify the token against platform data n reject auto gen tokens. For these titles, point `TokenFile` in `[Ticket]` to a `Token.ini` with tokens extracted from a legitimate install:
 
 ```ini
 [Ticket]
@@ -120,13 +123,13 @@ TokenFile=Token.ini
 The `Token.ini` file contains the Denuvo token data (activation and ownership tokens). These tokens are tied to hardware and cannot be shared between machines. You extract them from your own legal copy using tools like the ones in `Tools/`.
 
 ### SecureDLC ownership
-The `[Ticket]` section also supports `Ownership` — a base64-encoded signed ownership blob that SecureDLC endpoints validate. If present, the emulator returns it verbatim to the game.
+The `[Ticket]` section also supports `Ownership` — a base64-encoded signed ownership blob that SecureDLC endpoints validate. If present, the emulator returns it to the game.
 
 ---
 
 ## Building from Source
 
-Requires **CMake 3.20+** and a C++20 compiler.
+Requires *CMake 3.20+** and a C++20 compiler.
 
 ```bash
 git clone https://github.com/the-lust/ubi-emu.git
@@ -143,7 +146,7 @@ Output DLLs appear under `Build/Bin/{R1,R2,UPC,Orbit,DbData}/`.
 - **Clang** `cmake -B Build -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++`
 
 **Options:**
-- `-DBUILD_TESTS=ON` — build and run tests, `ctest` from build dir
+- `-DBUILD_TESTS=ON` — build an run tests, `ctest` from build dir
 - `-DBUILD_TOOLS=ON` — build config converters and utilities
 - `-DENABLE_LOGGING=ON` — enable logging subsystem
 
@@ -178,11 +181,11 @@ UUES/
 
 | Emulator | Status | Notes |
 |----------|--------|-------|
-| **R1** | ✅ Stable | Most tested. Covers all known uplay_r1 exports |
-| **R2** | ✅ Stable | Friend list API has edge cases |
-| **UPC** | ✅ Stable | Demux protocol works for tested titles |
-| **Orbit** | ✅ Stable | Tested with Driver: SF. LAN untested |
-| **DbData** | 🟡 Beta | Ticket + token emulation works. Some titles need manual token extraction |
+| **R1** | Most tested. Covers all known uplay_r1 exports |
+| **R2** | Friend list API has edge cases |
+| **UPC** | Demux protocol works for tested titles |
+| **Orbit** | Tested with Driver: SF. LAN untested |
+| **DbData** | Ticket/token emulation works (somee may be bugge dlike steam/ubi version app id for watch dogs 2)|
 
 **CI:** MSVC, MinGW, and Clang — all three build and pass tests.
 
@@ -190,7 +193,7 @@ UUES/
 
 ## Credits
 
-**Author:** [the-lust](https://github.com/the-lust)
+MANY THANKS TO MY BSF AND BRO :3 [Andreh](https://github.com/NotAndreh)
 
 This project stands on the shoulders of the game-emulation community. It was built after researching **69+ existing projects**, including but not limited to:
 
@@ -200,10 +203,10 @@ This project stands on the shoulders of the game-emulation community. It was bui
 - **denuvosanctuary/ubi-dbdata** — reference implementation for Denuvo SecureDLC ticket/token handling
 - **Various uplay_r1 and uplay_r2 wrappers** from the open-source scene, each tackling specific games
 
-Thanks to everyone who documented Ubisoft's DRM internals, protocol buffers, and API endpoints over the years. Without that collective effort none of this would exist.
+Thanks to veryone who documented Ubisofts internals, protocol buffers, and API endpoints over the years. without that collective effort none of this would exist.
 
 ---
 
 ## License
 
-MIT — do whatever you want with it. See `License.txt`. Don't blame us if it eats your save files.
+MIT — do whatever you want with it. See `License.txt`. Don't blame us if it eats your save files. ;)
