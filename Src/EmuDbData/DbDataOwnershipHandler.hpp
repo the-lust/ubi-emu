@@ -3,9 +3,19 @@
 #include "../Core/Common/Types.hpp"
 #include <unordered_set>
 
+#ifdef _WIN32
+    #ifdef EmuDbData_EXPORTS
+        #define EMUDBDATA_API __declspec(dllexport)
+    #else
+        #define EMUDBDATA_API
+    #endif
+#else
+    #define EMUDBDATA_API
+#endif
+
 namespace Uues::EmuDbData {
 
-class DbDataOwnershipHandler {
+class EMUDBDATA_API DbDataOwnershipHandler {
 public:
     static DbDataOwnershipHandler& GetInstance();
 
