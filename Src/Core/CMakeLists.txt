@@ -211,6 +211,6 @@ endif()
 
 if(WIN32)
     target_compile_definitions(LibUbi PUBLIC _WIN32_WINNT=0x0A00 NTDDI_VERSION=0x0A00000A)
-    # ws2_32 for winsock, crypt32 for certificate stuff
-    target_link_libraries(LibUbi PUBLIC ws2_32 crypt32 minhook)
+    # ws2_32 for winsock, crypt32 for certs, bcrypt for CNG crypto
+    target_link_libraries(LibUbi PUBLIC ws2_32 crypt32 bcrypt minhook)
 endif()

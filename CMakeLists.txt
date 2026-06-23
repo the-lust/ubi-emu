@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Export all DLL symbols on Windows (MSVC only, MinGW/Clang export by default)
-if(MSVC)
+# Export all DLL symbols on Windows via auto-generated .def file
+# lld-link (Clang) supports /DEF: just like MSVC link.exe
+# MinGW skips this — it auto-exports all symbols by default
+if(WIN32 AND NOT MINGW)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
