@@ -19,7 +19,7 @@ it is a modular framework that replaces five different ubisoft modules with a si
 | R2 | `uplay_r2_loader.dll` | Assassin's Creed Valhalla/Odyssey/Origins, Far Cry 4/5/6, Watch Dogs 2/Legion |
 | UPC | `upc_r1_loader.dll` | Ubisoft Connect titles (The Crew, newer games) |
 | Orbit | `ubiorbitapi_r2_loader.dll` | Driver: San Francisco, older Orbit-bound titles |
-| DbData | `dbdata.dll` | Games using Denuvo SecureDLC activation |
+| DbData | `dbdata.dll` | Games using Denuvo ig |
 
 2. **Drop `Ubi.ini`** next to the DLL. Minimal example:
 ```ini
