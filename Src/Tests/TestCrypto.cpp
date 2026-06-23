@@ -1,5 +1,4 @@
 #include "../Core/Crypto/AesEncryptor.hpp"
-#include "../Core/Crypto/TicketGenerator.hpp"
 #include "../Core/Log/Logger.hpp"
 #include <cstdio>
 #include <cstring>
@@ -31,19 +30,6 @@ bool RunCryptoTests() {
         auto Cipher = Enc.Encrypt(PlainBytes);
         if (Cipher.empty()) {
             Log::Logger::GetInstance().Warning("[CryptoTests] AES encrypt failed (may be expected)");
-        }
-    }
-
-    // TicketGenerator: basic validation
-    {
-        Core::Crypto::TicketGenerator Gen;
-        Common::ByteArray Ticket;
-        bool GenOk = Gen.GenerateTicket("12345", "TestUser", Ticket);
-        if (GenOk) {
-            bool Valid = Gen.ValidateTicket(Ticket);
-            if (!Valid) Errors++;
-        } else {
-            Log::Logger::GetInstance().Warning("[CryptoTests] Ticket generation not implemented yet");
         }
     }
 

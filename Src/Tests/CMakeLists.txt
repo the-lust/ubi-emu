@@ -44,17 +44,10 @@ if(BUILD_TESTS)
     target_include_directories(EmuOrbitTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
     add_test(NAME EmuOrbitTests COMMAND EmuOrbitTests)
 
-    add_executable(EmuDbDataTests
-        EmuDbDataTests.cpp
-    )
-    target_link_libraries(EmuDbDataTests PRIVATE EmuDbData LibUbi)
-    target_include_directories(EmuDbDataTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-    add_test(NAME EmuDbDataTests COMMAND EmuDbDataTests)
-
     add_executable(IntegrationTests
         IntegrationTests.cpp
     )
-    target_link_libraries(IntegrationTests PRIVATE EmuR1 EmuR2 EmuUPC EmuOrbit EmuDbData EmuShared LibUbi)
+    target_link_libraries(IntegrationTests PRIVATE EmuR1 EmuR2 EmuUPC EmuOrbit EmuShared LibUbi)
     target_include_directories(IntegrationTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
     add_test(NAME IntegrationTests COMMAND IntegrationTests)
 
@@ -65,10 +58,9 @@ if(BUILD_TESTS)
         "$<TARGET_FILE_DIR:EmuR2>"
         "$<TARGET_FILE_DIR:EmuUPC>"
         "$<TARGET_FILE_DIR:EmuOrbit>"
-        "$<TARGET_FILE_DIR:EmuDbData>"
     )
     set(TEST_ENV "PATH=$<JOIN:${DLL_DIRS},\\;>$<SEMICOLON>$ENV{PATH}")
-    foreach(TEST_TARGET CoreTests EmuR1Tests EmuR2Tests EmuUPCTests EmuOrbitTests EmuDbDataTests IntegrationTests)
+    foreach(TEST_TARGET CoreTests EmuR1Tests EmuR2Tests EmuUPCTests EmuOrbitTests IntegrationTests)
         set_tests_properties(${TEST_TARGET} PROPERTIES ENVIRONMENT "${TEST_ENV}")
     endforeach()
 endif()

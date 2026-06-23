@@ -23,7 +23,6 @@ namespace Defaults {
     constexpr const char* SaveRoot = "SaveGames";
     constexpr const char* ConfigFileName = "Ubi.ini";
     constexpr const char* LogFileName = "Uues.log";
-    constexpr const char* TicketFileName = "Token.ini";
 }
 
 namespace UplayIds {

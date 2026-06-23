@@ -3,7 +3,6 @@
 #include "../EmuR2/R2Loader.hpp"
 #include "../EmuUPC/UpcLoader.hpp"
 #include "../EmuOrbit/OrbitLoader.hpp"
-#include "../EmuDbData/DbDataLoader.hpp"
 #include "../Core/Log/Logger.hpp"
 #include "../Core/Common/StringUtils.hpp"
 
@@ -12,8 +11,6 @@
 //   "r2" / "uplay_r2"  -> R2Loader
 //   "upc"              -> UpcLoader
 //   "orbit"            -> OrbitLoader
-//   "dbdata"           -> DbDataLoader
-// TODO: move this mapping to a config file eventually
 
 namespace Uues::Shared {
 using namespace Uues::Core;
@@ -24,7 +21,6 @@ std::unique_ptr<EmulatorInterface> EmulatorFactory::CreateEmulator(const Common:
     if (Lower == "r2" || Lower == "uplay_r2") return CreateR2();
     if (Lower == "upc" || Lower == "uplay_upc") return CreateUPC();  // alias for compat
     if (Lower == "orbit" || Lower == "ubiorbit") return CreateOrbit();
-    if (Lower == "dbdata" || Lower == "denuvo") return CreateDbData();
     // Unknown type, return null but log a warning. Caller should handle this gracefully.
     Log::Logger::GetInstance().Warning("[EmuFactory] Unknown emulator type: " + Type + " — did you misspell it?");
     return nullptr;
@@ -44,10 +40,6 @@ std::unique_ptr<EmulatorInterface> EmulatorFactory::CreateUPC() {
 
 std::unique_ptr<EmulatorInterface> EmulatorFactory::CreateOrbit() {
     return std::make_unique<EmuOrbit::OrbitLoader>();
-}
-
-std::unique_ptr<EmulatorInterface> EmulatorFactory::CreateDbData() {
-    return std::make_unique<EmuDbData::DbDataLoader>();
 }
 
 bool EmulatorFactory::RegisterEmulator([[maybe_unused]] const Common::String& Type, std::unique_ptr<EmulatorInterface> Emulator) {

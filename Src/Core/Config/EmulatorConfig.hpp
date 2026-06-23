@@ -10,7 +10,6 @@ enum class EmulatorType {
     R2,
     Upc,
     Orbit,
-    DbData,
     Unknown
 };
 
@@ -41,11 +40,6 @@ struct EmulatorConfig {
     Common::String PipeName;
     bool LanMode;
     bool OfflineMode;
-
-    // Ticket
-    Common::String Ticket;
-    Common::String OwnershipToken;
-    Common::String TokenFilePath;
 
     // Overlay
     bool EnableOverlay;

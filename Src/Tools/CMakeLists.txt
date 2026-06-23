@@ -10,8 +10,6 @@ set(TOOLS_SOURCES
     LumaPlayImporter.hpp
     UnlockerJsonImporter.cpp
     UnlockerJsonImporter.hpp
-    DbDataIniImporter.cpp
-    DbDataIniImporter.hpp
     IniToUbiIniConverter.cpp
     IniToUbiIniConverter.hpp
     ExportValidator.cpp

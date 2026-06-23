@@ -7,7 +7,6 @@ add_subdirectory(EmuR1)
 add_subdirectory(EmuR2)
 add_subdirectory(EmuUPC)
 add_subdirectory(EmuOrbit)
-add_subdirectory(EmuDbData)
 
 # Shared DLL loader — needs Core and the emulator interfaces
 add_subdirectory(Shared)

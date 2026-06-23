@@ -22,13 +22,11 @@ int main() {
     auto R2    = Uues::Shared::EmulatorFactory::CreateR2();
     auto UPC   = Uues::Shared::EmulatorFactory::CreateUPC();
     auto Orbit = Uues::Shared::EmulatorFactory::CreateOrbit();
-    auto DbData = Uues::Shared::EmulatorFactory::CreateDbData();
 
     INTEG_TEST("CreateR1",       R1.get() != nullptr);
     INTEG_TEST("CreateR2",       R2.get() != nullptr);
     INTEG_TEST("CreateUPC",      UPC.get() != nullptr);
     INTEG_TEST("CreateOrbit",    Orbit.get() != nullptr);
-    INTEG_TEST("CreateDbData",   DbData.get() != nullptr);
 
     // --- EmulatorInterface conformance ---
     INTEG_TEST("R1 has name",    R1  && !R1->GetName().empty());
@@ -45,11 +43,6 @@ int main() {
         INTEG_TEST("Orbit is init'd", Orbit->IsInitialized());
         INTEG_TEST("Orbit shutdown",  Orbit->Shutdown());
         INTEG_TEST("Orbit not init'd", !Orbit->IsInitialized());
-    }
-
-    if (DbData) {
-        INTEG_TEST("DbData init",      DbData->Initialize());
-        INTEG_TEST("DbData shutdown",  DbData->Shutdown());
     }
 
     // --- Factory registry ---

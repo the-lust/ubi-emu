@@ -13,7 +13,6 @@ public:
     static std::unique_ptr<EmulatorInterface> CreateR2();
     static std::unique_ptr<EmulatorInterface> CreateUPC();
     static std::unique_ptr<EmulatorInterface> CreateOrbit();
-    static std::unique_ptr<EmulatorInterface> CreateDbData();
 
     static bool RegisterEmulator(const Core::Common::String& Type, std::unique_ptr<EmulatorInterface> Emulator);
 

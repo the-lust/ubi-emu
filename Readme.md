@@ -2,7 +2,7 @@
 
 it is a modular framework that replaces five different ubisoft modules with a single unified emulator. Each emulator builds as its own DLL from the same shared core library, so a fix in `LibUbi` applies to all of them.
 
-**Covers:** Uplay R1 (AC2, Far Cry 3 era), Uplay R2 (Valhalla, newer titles), Ubisoft Connect (UPC), Orbit (Driver: SF), and DbData (ticket/token activation).
+**Covers:** Uplay R1 (AC2, Far Cry 3 era), Uplay R2 (Valhalla, newer titles), Ubisoft Connect (UPC), Orbit (Driver: SF).
 
 ---
 
@@ -19,7 +19,7 @@ it is a modular framework that replaces five different ubisoft modules with a si
 | R2 | `uplay_r2_loader.dll` | Assassin's Creed Valhalla/Odyssey/Origins, Far Cry 4/5/6, Watch Dogs 2/Legion |
 | UPC | `upc_r1_loader.dll` | Ubisoft Connect titles (The Crew, newer games) |
 | Orbit | `ubiorbitapi_r2_loader.dll` | Driver: San Francisco, older Orbit-bound titles |
-| DbData | `dbdata.dll` | Games using Denuvo ig |
+
 
 2. **Drop `Ubi.ini`** next to the DLL. Minimal example:
 ```ini
@@ -74,19 +74,6 @@ Item IDs, one per line. Same format as DLC.
 | `PipeName` | *(none)* | Named pipe identifier |
 | `ServerIP` | `127.0.0.1` | Used by Orbit emulator |
 
-### [Ticket] — Denuvo Activation
-| Key | Default | Description |
-|-----|---------|-------------|
-| `Ticket` | *(empty)* | Base64-encoded Denuvo ticket |
-| `Ownership` | *(empty)* | SecureDLC ownership token |
-| `TokenFile` | `Token.ini` | Path to external token file |
-
-### [DbData]
-| Key | Default | Description |
-|-----|---------|-------------|
-| `AppId` | `0` | Game AppId for SecureDLC |
-| `UserId` | *(empty)* | Override UserId for Denuvo activation |
-
 ### Emulator-specific sections
 | Section | Key | Default | Description |
 |---------|-----|---------|-------------|
@@ -105,28 +92,6 @@ Lines starting with `;` or `#` are comments.
 
 ---
 
-## Activation / Tickets / Tokens
-
-Some newergames require a valid ticket and token chain before startng. The DbData emulator handles this with two approaches:
-
-### Automatic ticket generation
-Set `UnlockAllDlc=true` in `[Settings]` and the emulator generates a signed ticket internally using its built in RSA key. Most sgames work this way without extra file
-
-### External token file
-Some games verify the token against platform data n reject auto gen tokens. For these titles, point `TokenFile` in `[Ticket]` to a `Token.ini` with tokens extracted from a legitimate install:
-
-```ini
-[Ticket]
-TokenFile=Token.ini
-```
-
-The `Token.ini` file contains the Denuvo token data (activation and ownership tokens). These tokens are tied to hardware and cannot be shared between machines. You extract them from your own legal copy using tools like the ones in `Tools/`.
-
-### SecureDLC ownership
-The `[Ticket]` section also supports `Ownership` — a base64-encoded signed ownership blob that SecureDLC endpoints validate. If present, the emulator returns it to the game.
-
----
-
 ## Building from Source
 
 Requires *CMake 3.20+** and a C++20 compiler.
@@ -138,7 +103,7 @@ cmake -B Build
 cmake --build Build --config Release
 ```
 
-Output DLLs appear under `Build/Bin/{R1,R2,UPC,Orbit,DbData}/`.
+Output DLLs appear under `Build/Bin/{R1,R2,UPC,Orbit}/`.
 
 **Build presets** — see `Docs/Building/` for per-compiler guides:
 - **MSVC** `cmake -B Build -G "Visual Studio 17 2022" -A x64`
@@ -162,9 +127,8 @@ UUES/
 │   ├── EmuR2/        Uplay R2 emulator
 │   ├── EmuUPC/       Ubisoft Connect emulator
 │   ├── EmuOrbit/     Orbit DRM emulator
-│   ├── EmuDbData/    Denuvo ticket/token emulator
 │   ├── Shared/       DLL entry point and EmulatorFactory
-│   └── Tests/        Unit tests (Core, R1, R2, UPC, Orbit, DbData, Integration)
+│   └── Tests/        Unit tests
 ├── Tools/            Config importers, ExportValidator, GameIdResolver
 ├── Examples/         Pre-made Ubi.ini files for specific games
 ├── Docs/
@@ -185,7 +149,6 @@ UUES/
 | **R2** | Friend list API has edge cases |
 | **UPC** | Demux protocol works for tested titles |
 | **Orbit** | Tested with Driver: SF. LAN untested |
-| **DbData** | Ticket/token emulation works (somee may be bugge dlike steam/ubi version app id for watch dogs 2)|
 
 **CI:** MSVC, MinGW, and Clang — all three build and pass tests.
 
@@ -200,7 +163,6 @@ This project stands on the shoulders of the game-emulation community. It was bui
 - **Goldberg Emulator** — the gold standard for Steam emulation; inspired the EmuR1/R2 design
 - **ColdAPI** — Ubisoft Connect emulator that pioneered much of the UPC Demux protocol work
 - **LumaPlay** — another Ubisoft emulator with solid Uplay R1 coverage
-- **denuvosanctuary/ubi-dbdata** — reference implementation for Denuvo SecureDLC ticket/token handling
 - **Various uplay_r1 and uplay_r2 wrappers** from the open-source scene, each tackling specific games
 
 Thanks to veryone who documented Ubisofts internals, protocol buffers, and API endpoints over the years. without that collective effort none of this would exist.

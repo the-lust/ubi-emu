@@ -57,13 +57,6 @@ bool EmulatorConfig::LoadFromIni(const Ini::IniParser& Parser) {
         PipeName = NetSection.HasKey("PipeName") ? NetSection.GetKey("PipeName").GetValue().AsString() : "";
     }
 
-    if (Parser.HasSection("Ticket")) {
-        auto& TicketSection = Parser.GetSection("Ticket");
-        Ticket = TicketSection.HasKey("Ticket") ? TicketSection.GetKey("Ticket").GetValue().AsString() : "";
-        OwnershipToken = TicketSection.HasKey("Ownership") ? TicketSection.GetKey("Ownership").GetValue().AsString() : "";
-        TokenFilePath = TicketSection.HasKey("TokenFile") ? TicketSection.GetKey("TokenFile").GetValue().AsString() : "";
-    }
-
     return true;
 }
 

@@ -32,14 +32,11 @@ set(LIBUBI_SOURCES
     Ini/IniType.cpp
     Ini/IniValue.cpp
 
-    # Crypto — ticket generation and signature verification
+    # Crypto — encryption, signing, hashing
     Crypto/AesEncryptor.cpp
     Crypto/RsaSigner.cpp
     Crypto/ShaHasher.cpp
     Crypto/HmacHasher.cpp
-    Crypto/TicketGenerator.cpp
-    Crypto/TokenParser.cpp
-    Crypto/OwnershipListBuilder.cpp
 
     # Networking — sockets and named pipes for IPC
     Net/SocketClient.cpp
@@ -131,9 +128,7 @@ set(LIBUBI_HEADERS
     Crypto/RsaSigner.hpp
     Crypto/ShaHasher.hpp
     Crypto/HmacHasher.hpp
-    Crypto/TicketGenerator.hpp
-    Crypto/TokenParser.hpp
-    Crypto/OwnershipListBuilder.hpp
+
 
     Net/SocketClient.hpp
     Net/SocketServer.hpp

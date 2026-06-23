@@ -59,14 +59,4 @@ Ini::IniParser ConfigDefaults::CreateOrbitDefaults() {
     return Parser;
 }
 
-Ini::IniParser ConfigDefaults::CreateDbDataDefaults() {
-    auto Parser = CreateDefaultConfig();
-    Parser.SetValue("Ticket", "Ticket", "");
-    Parser.SetValue("Ticket", "Ownership", "");
-    Parser.SetValue("Ticket", "TokenFile", "Token.ini");
-    Parser.SetValue("Settings", "Dlcs", "");
-    Parser.SetValue("Settings", "AppId", "");
-    return Parser;
-}
-
 } // namespace Uues::Core::Config

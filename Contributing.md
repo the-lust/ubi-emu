@@ -1,4 +1,4 @@
-All code uses PascalCase for namespaces, classes, methods, files, and folders. No hungarian notation anywhere. Include guards are pragma once, indentation is four spaces, and braces go on their own line. The namespace tree starts with Uues and fans out into Core, EmuR1, EmuR2, EmuUPC, EmuOrbit, EmuDbData, Shared, Tools, and Tests.
+All code uses PascalCase for namespaces, classes, methods, files, and folders. No hungarian notation anywhere. Include guards are pragma once, indentation is four spaces, and braces go on their own line. The namespace tree starts with Uues and fans out into Core, EmuR1, EmuR2, EmuUPC, EmuOrbit,  Shared, Tools, and Tests.
 
 Branch from dev when you start working on something. Keep your changes consistent with the existing code style. If you add functionality write tests for it and make sure the whole suite still passes. Update any documentation that your change touches. Commit messages follow the pattern Component: Description, for example Core-Ini: Add multi-line value support or EmuR1: Implement UPLAY_Init stub.
 

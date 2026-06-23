@@ -11,7 +11,6 @@ public:
     static Ini::IniParser CreateR2Defaults();
     static Ini::IniParser CreateUpcDefaults();
     static Ini::IniParser CreateOrbitDefaults();
-    static Ini::IniParser CreateDbDataDefaults();
 
 private:
     ConfigDefaults() = delete;
