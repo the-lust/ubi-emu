@@ -19,10 +19,10 @@ int UpcStateManager::GetAppId() const { return mAppId; }
 void UpcStateManager::SetVersion(unsigned int v) { mVersion = v; }
 unsigned int UpcStateManager::GetVersion() const { return mVersion; }
 
-void UpcStateManager::SetConfig(const Core::Config::EmulatorConfig& Config) {
+void UpcStateManager::SetConfig(const Config::EmulatorConfig& Config) {
     mConfig = Config;
 }
-Core::Config::EmulatorConfig& UpcStateManager::GetConfig() {
+Config::EmulatorConfig& UpcStateManager::GetConfig() {
     return mConfig;
 }
 

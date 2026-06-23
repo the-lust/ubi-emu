@@ -19,6 +19,9 @@ jobs:
         version: 17
         platform: x64
 
+    - name: Setup Ninja
+      run: choco install ninja --no-progress -y
+
     - name: Configure CMake
       run: cmake -B Build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release
 

@@ -6,6 +6,11 @@ namespace Uues::Core::Storage {
 UserProfile::UserProfile() { Reset(); }
 UserProfile::~UserProfile() = default;
 
+UserProfile& UserProfile::GetInstance() {
+    static UserProfile Instance;
+    return Instance;
+}
+
 void UserProfile::SetUserId(const Common::String& Id) { mUserId = Id; }
 void UserProfile::SetUserName(const Common::String& Name) { mUserName = Name; }
 void UserProfile::SetEmail(const Common::String& Email) { mEmail = Email; }

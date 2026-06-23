@@ -12,7 +12,7 @@ public:
 NamedPipeClient::NamedPipeClient() : mImpl(std::make_unique<Impl>()) {}
 NamedPipeClient::~NamedPipeClient() { Disconnect(); }
 
-bool NamedPipeClient::Connect(const Common::String& PipeName, int TimeoutMs) {
+bool NamedPipeClient::Connect(const Common::String& PipeName, [[maybe_unused]] int TimeoutMs) {
     Common::String FullPath = "\\\\.\\pipe\\" + PipeName;
     // TODO: TimeoutMs is ignored, could use WaitNamedPipe for that
     mImpl->PipeHandle = CreateFileA(
@@ -33,7 +33,7 @@ bool NamedPipeClient::Send(const Common::ByteArray& Data) {
     if (mImpl->PipeHandle == INVALID_HANDLE_VALUE) return false;
     Dword BytesWritten;
     return WriteFile(mImpl->PipeHandle, Data.data(), static_cast<Dword>(Data.size()),
-                     &BytesWritten, nullptr) && BytesWritten == Data.size();
+                     reinterpret_cast<LPDWORD>(&BytesWritten), nullptr) && BytesWritten == Data.size();
 }
 
 bool NamedPipeClient::Receive(Common::ByteArray& OutData, size_t MaxSize) {
@@ -41,7 +41,7 @@ bool NamedPipeClient::Receive(Common::ByteArray& OutData, size_t MaxSize) {
     OutData.resize(MaxSize);
     Dword BytesRead;
     if (!ReadFile(mImpl->PipeHandle, OutData.data(), static_cast<Dword>(MaxSize),
-                  &BytesRead, nullptr)) {
+                  reinterpret_cast<LPDWORD>(&BytesRead), nullptr)) {
         OutData.clear();
         return false;
     }

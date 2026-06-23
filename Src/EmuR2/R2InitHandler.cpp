@@ -8,7 +8,7 @@ using namespace Uues::Core;
 bool R2InitHandler::mInitialized = false;
 int R2InitHandler::mAppId = 0;
 
-bool R2InitHandler::HandleInit(unsigned int Version, int AppId) {
+bool R2InitHandler::HandleInit([[maybe_unused]] unsigned int Version, int AppId) {
     if (mInitialized) {
         // already initialized, skip
         return true;

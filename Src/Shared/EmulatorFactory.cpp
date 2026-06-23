@@ -5,6 +5,7 @@
 #include "../EmuOrbit/OrbitLoader.hpp"
 #include "../EmuDbData/DbDataLoader.hpp"
 #include "../Core/Log/Logger.hpp"
+#include "../Core/Common/StringUtils.hpp"
 
 // Emulator-to-class mapping:
 //   "r1" / "uplay_r1"  -> R1Loader
@@ -18,7 +19,7 @@ namespace Uues::Shared {
 using namespace Uues::Core;
 
 std::unique_ptr<EmulatorInterface> EmulatorFactory::CreateEmulator(const Common::String& Type) {
-    auto Lower = Core::Common::StringUtils::ToLower(Type);
+    auto Lower = Common::StringUtils::ToLower(Type);
     if (Lower == "r1" || Lower == "uplay_r1") return CreateR1();
     if (Lower == "r2" || Lower == "uplay_r2") return CreateR2();
     if (Lower == "upc" || Lower == "uplay_upc") return CreateUPC();  // alias for compat
@@ -49,7 +50,7 @@ std::unique_ptr<EmulatorInterface> EmulatorFactory::CreateDbData() {
     return std::make_unique<EmuDbData::DbDataLoader>();
 }
 
-bool EmulatorFactory::RegisterEmulator(const Common::String& Type, std::unique_ptr<EmulatorInterface> Emulator) {
+bool EmulatorFactory::RegisterEmulator([[maybe_unused]] const Common::String& Type, std::unique_ptr<EmulatorInterface> Emulator) {
     // TODO: implement dynamic registration for plugin-style emulators
     // For now this is a no-op, we use static linking
     Log::Logger::GetInstance().Warning("[EmuFactory] RegisterEmulator called but dynamic registration is not yet implemented");

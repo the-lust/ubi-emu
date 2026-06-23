@@ -16,12 +16,12 @@ int R2StateManager::GetAppId() const {
     return mAppId;
 }
 
-void R2StateManager::SetConfig(const Core::Config::EmulatorConfig& Config) {
+void R2StateManager::SetConfig(const Config::EmulatorConfig& Config) {
     // TODO: validate Config before assigning
     mConfig = Config;
 }
 
-Core::Config::EmulatorConfig& R2StateManager::GetConfig() {
+Config::EmulatorConfig& R2StateManager::GetConfig() {
     return mConfig;
 }
 

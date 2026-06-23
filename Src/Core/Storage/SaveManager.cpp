@@ -1,11 +1,23 @@
 #include "SaveManager.hpp"
 #include "../Common/FileUtils.hpp"
-#include "../Common/Platform/WindowsPlatform.hpp"
+#include "Platform/WindowsPlatform.hpp"
+#include <filesystem>
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif
+#ifdef DeleteFile
+#undef DeleteFile
+#endif
 
 namespace Uues::Core::Storage {
 
 SaveManager::SaveManager() {}
 SaveManager::~SaveManager() = default;
+
+SaveManager& SaveManager::GetInstance() {
+    static SaveManager Instance;
+    return Instance;
+}
 
 bool SaveManager::Initialize(const Common::String& SaveDirectory, int SaveType) {
     // TODO: support per-user save directories with UserId subfolder

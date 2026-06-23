@@ -18,6 +18,8 @@ public:
     AchievementManager();
     ~AchievementManager();
 
+    static AchievementManager& GetInstance();
+
     bool Initialize(const Common::String& StoragePath);
     bool UnlockAchievement(const Common::String& Id, const Common::String& Name = "");
     bool LockAchievement(const Common::String& Id);

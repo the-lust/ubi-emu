@@ -4,6 +4,7 @@
 #include <cstdio>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunStorageTests() {
     Log::Logger::GetInstance().Info("[StorageTests] Starting");

@@ -1,7 +1,6 @@
 #include "R1OverlayHandler.hpp"
 
 namespace Uues::EmuR1 {
-using namespace Uues::Core;
 
 // static state - shared across all instances (not that we have any)
 bool R1OverlayHandler::mVisible = false;

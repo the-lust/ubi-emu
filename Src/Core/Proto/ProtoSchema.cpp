@@ -1,5 +1,6 @@
 #include "ProtoSchema.hpp"
 #include "../Common/StringUtils.hpp"
+#include "../Common/FileUtils.hpp"
 #include "../Ini/IniParser.hpp"
 
 namespace Uues::Core::Proto {

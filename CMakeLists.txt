@@ -5,6 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# Export all DLL symbols on Windows (MSVC only, MinGW/Clang export by default)
+if(MSVC)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+
 # --- Build options ---
 # Tests and tools default to ON so CI catches regressions early
 option(BUILD_TESTS "Build unit tests" ON)
@@ -12,6 +17,9 @@ option(BUILD_TOOLS "Build utility tools" ON)
 option(BUILD_EXAMPLES "Build example configurations" OFF)
 option(ENABLE_LOGGING "Enable logging subsystem" ON)
 option(ENABLE_PROTOBUF "Enable protobuf support" ON)
+
+# Enable CTest (must be in root for ctest to find tests from build root)
+enable_testing()
 
 # --- Platform-specific compile flags ---
 if(MSVC)

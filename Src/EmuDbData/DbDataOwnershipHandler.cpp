@@ -23,7 +23,7 @@ bool DbDataOwnershipHandler::CheckOwnership(int DlcId) {
 
 Common::ByteArray DbDataOwnershipHandler::GetOwnershipList() {
     if (mOwnedDlcs.empty()) {
-        Log::Logger::GetInstance().Debug("[DbDataOwnership] Ownership list empty" +
+        Log::Logger::GetInstance().Debug(Common::String("[DbDataOwnership] Ownership list empty") +
             (mOwnAll ? " (but own-all is set)" : ""));
     }
     std::ostringstream Oss;

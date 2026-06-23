@@ -25,7 +25,9 @@ bool AddressResolver::Resolve(const Common::String& HostName, Common::String& Ou
 bool AddressResolver::Resolve(const Common::String& HostName, uint32_t& OutIpv4) {
     Common::String IpStr;
     if (!Resolve(HostName, IpStr)) return false;
-    OutIpv4 = ntohl(inet_addr(IpStr.c_str()));
+    struct in_addr addr;
+    inet_pton(AF_INET, IpStr.c_str(), &addr);
+    OutIpv4 = ntohl(addr.s_addr);
     return true;
 }
 

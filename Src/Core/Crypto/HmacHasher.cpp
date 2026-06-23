@@ -7,7 +7,8 @@
 
 namespace Uues::Core::Crypto {
 
-struct HmacHasher::Impl {
+class HmacHasher::Impl {
+public:
     BCRYPT_ALG_HANDLE AlgHandle = nullptr;
     BCRYPT_KEY_HANDLE KeyHandle = nullptr;
     std::unique_ptr<Byte[]> KeyObject;
@@ -34,13 +35,14 @@ bool HmacHasher::SetKey(const Common::ByteArray& Key) {
 }
 
 Common::ByteArray HmacHasher::Compute(const Common::ByteArray& Data) {
-    Dword HashSize = 0;
-    Dword ResultSize = 0;
+    ULONG HashSize = 0;
+    ULONG ResultSize = 0;
     BCryptGetProperty(mImpl->AlgHandle, BCRYPT_HASH_LENGTH,
                       reinterpret_cast<PUCHAR>(&HashSize), sizeof(Dword), &ResultSize, 0);
     Common::ByteArray Result(HashSize);
     // FIXME: this ignores the key entirely, only works because HMAC flag is set on the handle
-    BCryptHash(mImpl->AlgHandle, Data.data(), static_cast<ULONG>(Data.size()),
+    BCryptHash(mImpl->AlgHandle, nullptr, 0,
+               const_cast<PUCHAR>(Data.data()), static_cast<ULONG>(Data.size()),
                Result.data(), static_cast<ULONG>(Result.size()));
     return Result;
 }

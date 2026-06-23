@@ -9,16 +9,16 @@ class DbDataTicketHandler {
 public:
     static DbDataTicketHandler& GetInstance();
 
-    void SetTicket(const Common::ByteArray& Ticket);
-    Common::ByteArray GetTicket() const;
-    bool ValidateTicket(const Common::ByteArray& Ticket);
+    void SetTicket(const Uues::Core::Common::ByteArray& Ticket);
+    Uues::Core::Common::ByteArray GetTicket() const;
+    bool ValidateTicket(const Uues::Core::Common::ByteArray& Ticket);
     bool GenerateTicket(const Core::Common::String& AppId, const Core::Common::String& UserId);
 
 private:
     DbDataTicketHandler();
     DbDataTicketHandler(const DbDataTicketHandler&) = delete;
     Core::Crypto::TicketGenerator mGenerator;
-    Common::ByteArray mCurrentTicket;
+    Uues::Core::Common::ByteArray mCurrentTicket;
 };
 
 } // namespace Uues::EmuDbData

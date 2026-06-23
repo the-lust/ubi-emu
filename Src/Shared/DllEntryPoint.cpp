@@ -7,7 +7,6 @@
 #include "DllEntryPoint.hpp"
 
 namespace Uues::Shared {
-using namespace Uues::Core;
 
 HINSTANCE DllEntryPoint::mInstance = nullptr;
 

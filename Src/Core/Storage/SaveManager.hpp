@@ -9,6 +9,8 @@ public:
     SaveManager();
     ~SaveManager();
 
+    static SaveManager& GetInstance();
+
     bool Initialize(const Common::String& SaveDirectory, int SaveType);
     Common::String ResolveSavePath(const Common::String& RelativePath) const;
     bool SaveFile(const Common::String& FileName, const Common::ByteArray& Data);

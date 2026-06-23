@@ -23,7 +23,7 @@ bool ArchitectureDetector::IsX64() { return GetCurrentArchitecture() == Architec
 bool ArchitectureDetector::IsWow64Process() {
     BOOL IsWow = FALSE;
     // NOTE: IsWow64Process2 exists on Win10+ but we use the original for compatibility
-    return IsWow64Process(GetCurrentProcess(), &IsWow) && IsWow;
+    return ::IsWow64Process(GetCurrentProcess(), &IsWow) && IsWow;
 }
 
 Common::String ArchitectureDetector::GetArchitectureString() {

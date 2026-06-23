@@ -41,7 +41,7 @@ int UPC_USER_GetEmail(char* Buffer, unsigned int BufferSize) {
     return 1;
 }
 
-int UPC_ACH_GetAchievement(char* AchId, int* OutUnlocked) {
+int UPC_ACH_GetAchievement([[maybe_unused]] char* AchId, int* OutUnlocked) {
     if (OutUnlocked) *OutUnlocked = 0;
     return 1;
 }
@@ -52,18 +52,18 @@ int UPC_ACH_SetAchievement(char* AchId) {
     return 1;
 }
 
-int UPC_DLC_IsInstalled(int DlcId, int* OutInstalled) {
+int UPC_DLC_IsInstalled([[maybe_unused]] int DlcId, int* OutInstalled) {
     if (OutInstalled) *OutInstalled = 1;
     return 1;
 }
 
-int UPC_DLC_GetList(int* OutDlcIds, unsigned int* OutCount) {
+int UPC_DLC_GetList([[maybe_unused]] int* OutDlcIds, unsigned int* OutCount) {
     if (OutCount) *OutCount = 0;
     return 1;
 }
 
-int UPC_SAVE_GetSaveGame(char* SaveName, void* Buffer, unsigned int* BufferSize) { return 0; }
-int UPC_SAVE_SetSaveGame(char* SaveName, void* Buffer, unsigned int BufferSize) { return 1; }
+int UPC_SAVE_GetSaveGame([[maybe_unused]] char* SaveName, [[maybe_unused]] void* Buffer, [[maybe_unused]] unsigned int* BufferSize) { return 0; }
+int UPC_SAVE_SetSaveGame([[maybe_unused]] char* SaveName, [[maybe_unused]] void* Buffer, [[maybe_unused]] unsigned int BufferSize) { return 1; }
 
 int UPC_OVERLAY_Show() { return 1; }
 int UPC_OVERLAY_Hide() { return 1; }
@@ -73,11 +73,11 @@ int UPC_GetGameSession(unsigned int* OutSessionId) {
     return 1;
 }
 
-int UPC_SetGameSession(unsigned int SessionId) { return 1; }
+int UPC_SetGameSession([[maybe_unused]] unsigned int SessionId) { return 1; }
 
-int UPC_GetStoreItems(char* Buffer, unsigned int BufferSize) { return 0; }
+int UPC_GetStoreItems([[maybe_unused]] char* Buffer, [[maybe_unused]] unsigned int BufferSize) { return 0; }
 
-int UPC_GetStats(char* StatNames, int* OutValues, unsigned int Count) {
+int UPC_GetStats([[maybe_unused]] char* StatNames, int* OutValues, unsigned int Count) {
     // TODO: StatNames parsing is not implemented yet
     if (OutValues && Count > 0) {
         for (unsigned int i = 0; i < Count; i++) {
@@ -87,6 +87,6 @@ int UPC_GetStats(char* StatNames, int* OutValues, unsigned int Count) {
     return 1;
 }
 
-int UPC_LaunchApp(int AppId) { return 1; }
+int UPC_LaunchApp([[maybe_unused]] int AppId) { return 1; }
 
 } // extern "C"

@@ -9,6 +9,8 @@ public:
     UserProfile();
     ~UserProfile();
 
+    static UserProfile& GetInstance();
+
     void SetUserId(const Common::String& Id);
     void SetUserName(const Common::String& Name);
     void SetEmail(const Common::String& Email);

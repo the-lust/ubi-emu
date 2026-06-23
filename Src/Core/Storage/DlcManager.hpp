@@ -10,6 +10,8 @@ public:
     DlcManager();
     ~DlcManager();
 
+    static DlcManager& GetInstance();
+
     void AddDlc(const Common::String& DlcId);
     void AddDlcs(const Common::StringList& DlcIds);
     void RemoveDlc(const Common::String& DlcId);

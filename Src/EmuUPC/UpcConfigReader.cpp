@@ -4,7 +4,7 @@
 namespace Uues::EmuUPC {
 using namespace Uues::Core;
 
-bool UpcConfigReader::ReadConfig(const Core::Ini::IniParser& parser, Core::Config::EmulatorConfig& cfg) {
+bool UpcConfigReader::ReadConfig(const Ini::IniParser& parser, [[maybe_unused]] Config::EmulatorConfig& cfg) {
     Log::Logger::GetInstance().Info("[UPCConfig] Reading UPC config");
 
     // FIXME: actually parse values from parser

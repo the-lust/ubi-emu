@@ -12,7 +12,7 @@ bool DbDataLoader::Initialize() {
     }
     if (mConfigPath.empty()) {
         Log::Logger::GetInstance().Warning("[DbDataLoader] No config loaded, initializing with defaults");
-    } else if (!FileUtils::FileExists(mConfigPath)) {
+    } else if (!Common::FileUtils::Exists(mConfigPath)) {
         Log::Logger::GetInstance().Warning("[DbDataLoader] Config '" + mConfigPath + "' not found, continuing anyway");
     }
     Log::Logger::GetInstance().Info("[DbDataLoader] DbData Emulator v" + GetVersion() + " starting");
@@ -34,7 +34,7 @@ Common::String DbDataLoader::GetVersion() const { return "1.0.1.0"; }
 bool DbDataLoader::LoadConfig(const Common::String& ConfigPath) {
     if (ConfigPath.empty()) return false;
     mConfigPath = ConfigPath;
-    if (FileUtils::FileExists(ConfigPath)) {
+    if (Common::FileUtils::Exists(ConfigPath)) {
         Log::Logger::GetInstance().Info("[DbDataLoader] Config loaded: " + ConfigPath);
     } else {
         Log::Logger::GetInstance().Warning("[DbDataLoader] Config path set but file missing: " + ConfigPath);

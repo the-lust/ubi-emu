@@ -20,6 +20,6 @@ set(TOOLS_SOURCES
     GameIdResolver.hpp
 )
 
-add_executable(UuesTools ${TOOLS_SOURCES})
+add_library(UuesTools ${TOOLS_SOURCES})
 target_link_libraries(UuesTools PRIVATE LibUbi)
 target_include_directories(UuesTools PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

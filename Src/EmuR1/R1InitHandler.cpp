@@ -7,7 +7,7 @@ using namespace Uues::Core;
 
 bool R1InitHandler::mInitialized = false;
 
-bool R1InitHandler::HandleInit(unsigned int Version, int AppId) {
+bool R1InitHandler::HandleInit([[maybe_unused]] unsigned int Version, int AppId) {
     // TODO: should we re-init if already initialized?
     if (mInitialized) {
         Log::Logger::GetInstance().Warning("[R1Init] Already initialized, skipping");

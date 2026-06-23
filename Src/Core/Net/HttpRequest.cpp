@@ -1,6 +1,7 @@
 #include "HttpRequest.hpp"
 #include "../Common/StringUtils.hpp"
 #include <winsock2.h>
+#include <ws2tcpip.h>
 #include <sstream>
 
 namespace Uues::Core::Net {
@@ -31,7 +32,7 @@ public:
 HttpRequest::HttpRequest() : mImpl(std::make_unique<Impl>()) {}
 HttpRequest::~HttpRequest() = default;
 
-bool HttpRequest::Get(const Common::String& Url, Common::String& OutResponse, int TimeoutMs) {
+bool HttpRequest::Get(const Common::String& Url, Common::String& OutResponse, [[maybe_unused]] int TimeoutMs) {
     Common::String Host, Path;
     uint16_t Port;
     if (!mImpl->ParseUrl(Url, Host, Path, Port)) { return false; }
@@ -79,7 +80,7 @@ bool HttpRequest::Get(const Common::String& Url, Common::String& OutResponse, in
 }
 
 bool HttpRequest::Post(const Common::String& Url, const Common::String& Body,
-                        Common::String& OutResponse, int TimeoutMs) {
+                        Common::String& OutResponse, [[maybe_unused]] int TimeoutMs) {
     Common::String Host, Path;
     uint16_t Port;
     if (!mImpl->ParseUrl(Url, Host, Path, Port)) {
@@ -128,7 +129,7 @@ bool HttpRequest::Post(const Common::String& Url, const Common::String& Body,
 }
 
 bool HttpRequest::PostJson(const Common::String& Url, const Common::String& JsonBody,
-                            Common::String& OutResponse, int TimeoutMs) {
+                            Common::String& OutResponse, [[maybe_unused]] int TimeoutMs) {
     Common::String Host, Path;
     uint16_t Port;
     if (!mImpl->ParseUrl(Url, Host, Path, Port)) return false;

@@ -3,6 +3,7 @@
 #include <cstdio>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunNetTests() {
     Log::Logger::GetInstance().Info("[NetTests] Starting network tests");
@@ -11,15 +12,19 @@ bool RunNetTests() {
 
     // SocketClient creation (no connection attempt here)
     {
-        Core::Net::SocketClient Client("tcp");
+        Core::Net::SocketClient Client;
         Failed += 0; // no news is good news
     }
 
-    // SocketClient with invalid params
+    // SocketClient with connect to nowhere (should fail gracefully)
     {
-        Core::Net::SocketClient BadClient("");
-        // should not crash, we just log the result
-        Log::Logger::GetInstance().Debug("[NetTests] Created client with empty protocol (expected)");
+        Core::Net::SocketClient Client;
+        bool Connected = Client.Connect("localhost", 0);
+        if (Connected) {
+            Log::Logger::GetInstance().Warning("[NetTests] Connected to port 0? (unexpected)");
+        } else {
+            Log::Logger::GetInstance().Info("[NetTests] Connect to port 0 rejected (expected)");
+        }
     }
 
     printf("[Net] Network layer basic checks: %s\n", Failed == 0 ? "PASS" : "FAIL");

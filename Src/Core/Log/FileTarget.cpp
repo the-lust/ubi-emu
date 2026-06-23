@@ -2,6 +2,9 @@
 #include "../Common/TimeUtils.hpp"
 #include "../Common/StringUtils.hpp"
 #include "../Common/FileUtils.hpp"
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif
 
 namespace Uues::Core::Log {
 

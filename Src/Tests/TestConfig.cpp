@@ -4,6 +4,7 @@
 #include <cstdio>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunConfigTests() {
     Log::Logger::GetInstance().Info("[ConfigTests] Starting");

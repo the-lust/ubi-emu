@@ -31,7 +31,7 @@ bool NamedPipeServer::Send(const Common::ByteArray& Data) {
     if (mImpl->PipeHandle == INVALID_HANDLE_VALUE) return false;
     Dword BytesWritten;
     return WriteFile(mImpl->PipeHandle, Data.data(), static_cast<Dword>(Data.size()),
-                     &BytesWritten, nullptr);
+                     reinterpret_cast<LPDWORD>(&BytesWritten), nullptr);
 }
 
 bool NamedPipeServer::Receive(Common::ByteArray& OutData, size_t MaxSize) {
@@ -39,7 +39,7 @@ bool NamedPipeServer::Receive(Common::ByteArray& OutData, size_t MaxSize) {
     OutData.resize(MaxSize);
     Dword BytesRead;
     if (!ReadFile(mImpl->PipeHandle, OutData.data(), static_cast<Dword>(MaxSize),
-                  &BytesRead, nullptr)) {
+                  reinterpret_cast<LPDWORD>(&BytesRead), nullptr)) {
         OutData.clear();
         return false;
     }

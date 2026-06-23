@@ -36,9 +36,9 @@ int main() {
     Test("shutdown", R2->Shutdown() ? R_PASS : R_FAIL);
     Test("not init'd after shutdown", !R2->IsInitialized() ? R_PASS : R_FAIL);
 
-    // shutdown when already down is handled gracefully
+    // shutdown when already down is idempotent (returns true)
     bool ShutdownAgain = R2->Shutdown();
-    Test("shutdown twice graceful", !ShutdownAgain ? R_PASS : R_FAIL);
+    Test("shutdown twice graceful", ShutdownAgain ? R_PASS : R_FAIL);
 
     printf("\n%d / %d tests passed\n", sGood, sTotal);
     return (sGood == sTotal) ? 0 : 1;

@@ -5,6 +5,11 @@ namespace Uues::Core::Storage {
 DlcManager::DlcManager() : mUnlockAll(true) {}
 DlcManager::~DlcManager() = default;
 
+DlcManager& DlcManager::GetInstance() {
+    static DlcManager Instance;
+    return Instance;
+}
+
 void DlcManager::AddDlc(const Common::String& DlcId) { mDlcs.insert(DlcId); }
 void DlcManager::AddDlcs(const Common::StringList& DlcIds) {
     for (auto& Id : DlcIds) mDlcs.insert(Id);

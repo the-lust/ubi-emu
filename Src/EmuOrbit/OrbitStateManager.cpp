@@ -20,16 +20,16 @@ void OrbitStateManager::SetAppId(int AppId) {
 
 int OrbitStateManager::GetAppId() const { return mAppId; }
 
-void OrbitStateManager::SetConfig(const Core::Config::EmulatorConfig& Config) {
+void OrbitStateManager::SetConfig(const Config::EmulatorConfig& Config) {
     mConfig = Config;
     Log::Logger::GetInstance().Info("[OrbitState] Config applied for user '" + mConfig.UserName + "'");
 }
 
-Core::Config::EmulatorConfig& OrbitStateManager::GetConfig() { return mConfig; }
+Config::EmulatorConfig& OrbitStateManager::GetConfig() { return mConfig; }
 
 void OrbitStateManager::Reset() {
     mAppId = 0;
-    mConfig = Core::Config::EmulatorConfig::LoadDefaults();
+    mConfig = Config::EmulatorConfig::LoadDefaults();
     Log::Logger::GetInstance().Info("[OrbitState] State reset to defaults");
 }
 

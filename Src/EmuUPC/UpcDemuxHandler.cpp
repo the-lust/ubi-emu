@@ -15,18 +15,18 @@ UpcDemuxHandler::UpcDemuxHandler() {
 
 void UpcDemuxHandler::RegisterHandlers() {
     // I have no idea what service 1 actually does but games call it constantly
-    mRouter.RegisterService(1, [](const Core::Proto::DemuxMessage& Msg) {
-        Logger::GetInstance().Debug("[UpcDemux] Service 1 handler called");
-        Core::Proto::DemuxMessage Response;
+    mRouter.RegisterService(1, [](const Proto::DemuxMessage& Msg) {
+        Log::Logger::GetInstance().Debug("[UpcDemux] Service 1 handler called");
+        Proto::DemuxMessage Response;
         Response.SetRequestId(Msg.GetRequestId());
         // FIXME: need to populate response data
         return Response.Serialize();
     });
 
     // service 2 - used by Ubi.com services
-    mRouter.RegisterService(2, [](const Core::Proto::DemuxMessage& Msg) {
-        Logger::GetInstance().Debug("[UpcDemux] Service 2 handler called");
-        Core::Proto::DemuxMessage Response;
+    mRouter.RegisterService(2, [](const Proto::DemuxMessage& Msg) {
+        Log::Logger::GetInstance().Debug("[UpcDemux] Service 2 handler called");
+        Proto::DemuxMessage Response;
         Response.SetRequestId(Msg.GetRequestId());
         Response.SetPayload({});
         return Response.Serialize();
@@ -35,14 +35,14 @@ void UpcDemuxHandler::RegisterHandlers() {
 
 Common::ByteArray UpcDemuxHandler::HandleRequest(const Common::ByteArray& Request) {
     if (Request.empty()) {
-        Logger::GetInstance().Warning("[UpcDemux] Empty request received");
+        Log::Logger::GetInstance().Warning("[UpcDemux] Empty request received");
         return {};
     }
     mRequestCount++;
-    Logger::GetInstance().Debug("[UpcDemux] Handling request #" + std::to_string(mRequestCount));
+    Log::Logger::GetInstance().Debug("[UpcDemux] Handling request #" + std::to_string(mRequestCount));
     return mRouter.Route(Request);
 }
 
-Core::Proto::DemuxRouter& UpcDemuxHandler::GetRouter() { return mRouter; }
+Proto::DemuxRouter& UpcDemuxHandler::GetRouter() { return mRouter; }
 
 } // namespace Uues::EmuUPC

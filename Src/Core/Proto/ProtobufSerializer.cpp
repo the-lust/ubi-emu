@@ -37,7 +37,7 @@ Common::ByteArray ProtobufSerializer::SerializeField(const ProtoField& Field) {
             break;
         }
         case ProtoFieldType::LengthDelimited: {
-            auto& Bytes = std::get<Common::ByteArray>(Field.GetValue());
+            auto Bytes = std::get<Common::ByteArray>(Field.GetValue());
             auto Length = EncodeVarint(Bytes.size());
             Result.insert(Result.end(), Length.begin(), Length.end());
             Result.insert(Result.end(), Bytes.begin(), Bytes.end());

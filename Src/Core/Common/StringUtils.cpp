@@ -3,6 +3,9 @@
 #include <sstream>
 #include <cstdarg>
 #include <cwchar>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 namespace Uues::Core::Common {
 

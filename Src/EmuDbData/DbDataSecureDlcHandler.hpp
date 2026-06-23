@@ -9,8 +9,8 @@ class DbDataSecureDlcHandler {
 public:
     static DbDataSecureDlcHandler& GetInstance();
 
-    Common::ByteArray HandleRequest(const Common::ByteArray& Request);
-    Common::ByteArray BuildResponse(const Core::Common::StringList& Dlcs);
+    Uues::Core::Common::ByteArray HandleRequest(const Uues::Core::Common::ByteArray& Request);
+    Uues::Core::Common::ByteArray BuildResponse(const Core::Common::StringList& Dlcs);
     void SetBaseAppId(const Core::Common::String& AppId);
     void SetUserId(const Core::Common::String& UserId);
 

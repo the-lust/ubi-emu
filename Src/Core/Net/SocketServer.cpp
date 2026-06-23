@@ -13,7 +13,14 @@ public:
     ClientHandler Handler;
 
     ~Impl() {
-        Stop();
+        Running = false;
+        if (ListenSocket != INVALID_SOCKET) {
+            closesocket(ListenSocket);
+            ListenSocket = INVALID_SOCKET;
+        }
+        if (AcceptThread.joinable()) {
+            AcceptThread.join();
+        }
     }
 };
 

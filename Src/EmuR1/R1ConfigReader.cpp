@@ -6,14 +6,14 @@
 namespace Uues::EmuR1 {
 using namespace Uues::Core;
 
-R1ConfigReader::R1ConfigReader() : mConfig(Core::Config::EmulatorConfig::LoadDefaults()) {
-    mConfig.Type = Core::Config::EmulatorType::R1;
+R1ConfigReader::R1ConfigReader() : mConfig(Config::EmulatorConfig::LoadDefaults()) {
+    mConfig.Type = Config::EmulatorType::R1;
 }
 
 R1ConfigReader::~R1ConfigReader() = default;
 
 bool R1ConfigReader::Load(const Common::String& Path) {
-    Core::Ini::IniParser parser;
+    Ini::IniParser parser;
     if (!parser.Load(Path)) {
         // Try Ubi.ini as fallback - some old games use this naming
         auto dirName = Common::FileUtils::GetDirectoryName(Path);
@@ -26,10 +26,10 @@ bool R1ConfigReader::Load(const Common::String& Path) {
     return LoadFromIni(parser);
 }
 
-bool R1ConfigReader::LoadFromIni(const Core::Ini::IniParser& Parser) {
+bool R1ConfigReader::LoadFromIni(const Ini::IniParser& Parser) {
     return mConfig.LoadFromIni(Parser);
 }
 
-Core::Config::EmulatorConfig R1ConfigReader::GetConfig() const { return mConfig; }
+Config::EmulatorConfig R1ConfigReader::GetConfig() const { return mConfig; }
 
 } // namespace Uues::EmuR1

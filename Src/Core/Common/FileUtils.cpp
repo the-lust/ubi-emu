@@ -5,6 +5,9 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif
 #endif
 
 namespace fs = std::filesystem;

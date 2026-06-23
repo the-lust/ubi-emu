@@ -8,7 +8,7 @@ namespace Uues::Tools {
 class IniToUbiIniConverter {
 public:
     static bool Convert(const Core::Ini::IniParser& Source, Core::Ini::IniParser& Output);
-    static bool SaveToFile(const Core::Ini::IniParser& Parser, const Core::Common::String& OutputPath);
+    static bool SaveToFile(Core::Ini::IniParser& Parser, const Core::Common::String& OutputPath);
 };
 
 } // namespace Uues::Tools

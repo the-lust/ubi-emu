@@ -41,12 +41,12 @@ bool DbDataTokenHandler::LoadFromFile(const Common::String& Path) {
         Log::Logger::GetInstance().Error("[DbDataToken] LoadFromFile called with empty path");
         return false;
     }
-    if (!FileUtils::FileExists(Path)) {
+    if (!Common::FileUtils::Exists(Path)) {
         Log::Logger::GetInstance().Warning("[DbDataToken] Token file not found: " + Path);
         return false;
     }
 
-    Core::Ini::IniParser Parser;
+    Ini::IniParser Parser;
     if (!Parser.Load(Path)) {
         Log::Logger::GetInstance().Error("[DbDataToken] Failed to parse token file: " + Path);
         return false;
@@ -74,7 +74,7 @@ bool DbDataTokenHandler::SaveToFile(const Common::String& Path) const {
         return false;
     }
 
-    Core::Ini::IniParser Parser;
+    Ini::IniParser Parser;
 
     auto DefaultIt = mTokens.find("default");
     if (DefaultIt != mTokens.end()) {

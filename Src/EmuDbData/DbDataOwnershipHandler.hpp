@@ -10,7 +10,7 @@ public:
     static DbDataOwnershipHandler& GetInstance();
 
     bool CheckOwnership(int DlcId);
-    Common::ByteArray GetOwnershipList();
+    Uues::Core::Common::ByteArray GetOwnershipList();
     void AddOwnedDlc(int DlcId);
     void SetOwnAll(bool OwnAll);
 

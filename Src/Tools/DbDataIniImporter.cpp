@@ -7,10 +7,10 @@ using namespace Uues::Core;
 // TODO: actually implement the INI -> DbData format conversion
 // Currently just copies a placeholder section.
 
-bool DbDataIniImporter::Import(const Core::Ini::IniParser& Source, Core::Ini::IniParser& Output) {
+bool DbDataIniImporter::Import(const Ini::IniParser& Source, Ini::IniParser& Output) {
     Log::Logger::GetInstance().Warning("[DbDataIniImporter] Stub — real import not implemented, adding placeholder");
 
-    Output.AddSection("Ticket");
+    Output.AddSection(Ini::IniSection("Ticket"));
     Output.SetValue("Ticket", "type", "ownership");
     Output.SetValue("Ticket", "source", "ini_import");
 

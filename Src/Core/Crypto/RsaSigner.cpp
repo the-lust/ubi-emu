@@ -3,11 +3,16 @@
 #include <bcrypt.h>
 #include <memory>
 
+#ifndef NT_SUCCESS
+#define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
+#endif
+
 #pragma comment(lib, "bcrypt.lib")
 
 namespace Uues::Core::Crypto {
 
-struct RsaSigner::Impl {
+class RsaSigner::Impl {
+public:
     BCRYPT_ALG_HANDLE AlgHandle = nullptr;
     BCRYPT_KEY_HANDLE KeyHandle = nullptr;
     Dword KeyObjectLength = 0;
@@ -21,7 +26,7 @@ struct RsaSigner::Impl {
 
 RsaSigner::RsaSigner() : mImpl(std::make_unique<Impl>()) {
     BCryptOpenAlgorithmProvider(&mImpl->AlgHandle, BCRYPT_RSA_ALGORITHM, nullptr, 0);
-    BCryptSetProperty(mImpl->AlgHandle, BCRYPT_PADDING_SCHEME,
+    BCryptSetProperty(mImpl->AlgHandle, L"PaddingScheme",
                       reinterpret_cast<PUCHAR>(const_cast<wchar_t*>(L"PKCS1")),
                       sizeof(L"PKCS1"), 0);
 }
@@ -35,7 +40,7 @@ bool RsaSigner::ImportPublicKey(const Common::ByteArray& KeyBlob) {
     }
     // FIXME: no error logged if blob is malformed, just returns false
     NTSTATUS Status = BCryptImportKeyPair(
-        mImpl->AlgHandle, nullptr, BCRYPT_RSAPUBLIC_KEY_BLOB,
+        mImpl->AlgHandle, nullptr, L"RSAPUBLICBLOB",
         &mImpl->KeyHandle,
         const_cast<PUCHAR>(KeyBlob.data()), static_cast<ULONG>(KeyBlob.size()), 0);
     return NT_SUCCESS(Status);
@@ -47,7 +52,7 @@ bool RsaSigner::ImportPrivateKey(const Common::ByteArray& KeyBlob) {
         mImpl->KeyHandle = nullptr;
     }
     NTSTATUS Status = BCryptImportKeyPair(
-        mImpl->AlgHandle, nullptr, BCRYPT_RSAFULLPRIVATE_KEY_BLOB,
+        mImpl->AlgHandle, nullptr, L"RSAFULLPRIVATEBLOB",
         &mImpl->KeyHandle,
         const_cast<PUCHAR>(KeyBlob.data()), static_cast<ULONG>(KeyBlob.size()), 0);
     return NT_SUCCESS(Status);
@@ -55,7 +60,7 @@ bool RsaSigner::ImportPrivateKey(const Common::ByteArray& KeyBlob) {
 
 Common::ByteArray RsaSigner::Sign(const Common::ByteArray& Data) {
     // expects caller to have pre-hashed the data, we just sign whatever we're given
-    Dword ResultSize = 0;
+    ULONG ResultSize = 0;
     BCryptSignHash(mImpl->KeyHandle, nullptr, const_cast<PUCHAR>(Data.data()),
                    static_cast<ULONG>(Data.size()), nullptr, 0, &ResultSize, 0);
     Common::ByteArray Result(ResultSize);
@@ -74,11 +79,11 @@ bool RsaSigner::Verify(const Common::ByteArray& Data, const Common::ByteArray& S
 }
 
 Common::ByteArray RsaSigner::GetPublicKey() const {
-    Dword ResultSize = 0;
-    BCryptExportKey(mImpl->KeyHandle, nullptr, BCRYPT_RSAPUBLIC_KEY_BLOB,
+    ULONG ResultSize = 0;
+    BCryptExportKey(mImpl->KeyHandle, nullptr, L"RSAPUBLICBLOB",
                     nullptr, 0, &ResultSize, 0);
     Common::ByteArray Result(ResultSize);
-    BCryptExportKey(mImpl->KeyHandle, nullptr, BCRYPT_RSAPUBLIC_KEY_BLOB,
+    BCryptExportKey(mImpl->KeyHandle, nullptr, L"RSAPUBLICBLOB",
                     Result.data(), ResultSize, &ResultSize, 0);
     return Result;
 }

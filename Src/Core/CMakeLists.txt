@@ -182,6 +182,20 @@ set(LIBUBI_HEADERS
     Threading/EventSignal.hpp
 )
 
+# --- Third-party dependencies ---
+include(FetchContent)
+FetchContent_Declare(
+    minhook
+    GIT_REPOSITORY https://github.com/TsudaKageyu/minhook.git
+    GIT_TAG master
+)
+set(BUILD_SHARED_LIBS OFF)
+FetchContent_MakeAvailable(minhook)
+
+if(MSVC)
+    target_compile_options(minhook PRIVATE /wd4201 /wd4701 /wd4310 /wd4244)
+endif()
+
 add_library(LibUbi STATIC ${LIBUBI_SOURCES} ${LIBUBI_HEADERS})
 
 # Expose current dir so subprojects can include our public headers
@@ -196,6 +210,7 @@ if(ENABLE_PROTOBUF)
 endif()
 
 if(WIN32)
+    target_compile_definitions(LibUbi PUBLIC _WIN32_WINNT=0x0A00 NTDDI_VERSION=0x0A00000A)
     # ws2_32 for winsock, crypt32 for certificate stuff
-    target_link_libraries(LibUbi PUBLIC ws2_32 crypt32)
+    target_link_libraries(LibUbi PUBLIC ws2_32 crypt32 minhook)
 endif()

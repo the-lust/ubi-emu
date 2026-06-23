@@ -8,7 +8,7 @@ static Common::String s_CurrentPresence = "InMenu";
 
 bool R1RichPresenceHandler::SetPresence(const Common::String& Presence) {
     s_CurrentPresence = Presence;
-    Logger::GetInstance().Debug("[R1Presence] Set to: " + Presence);
+    Log::Logger::GetInstance().Debug("[R1Presence] Set to: " + Presence);
     return true;
 }
 

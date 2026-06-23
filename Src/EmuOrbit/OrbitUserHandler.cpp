@@ -6,7 +6,7 @@ namespace Uues::EmuOrbit {
 using namespace Uues::Core;
 
 Common::String OrbitUserHandler::GetName() {
-    auto Name = Core::Storage::UserProfile::GetInstance().GetUserName();
+    auto Name = Storage::UserProfile::GetInstance().GetUserName();
     if (Name.empty()) {
         Log::Logger::GetInstance().Warning("[OrbitUser] No user name set, falling back to 'Player'");
         Name = "Player";
@@ -15,7 +15,7 @@ Common::String OrbitUserHandler::GetName() {
 }
 
 Common::String OrbitUserHandler::GetId() {
-    auto Id = Core::Storage::UserProfile::GetInstance().GetUserId();
+    auto Id = Storage::UserProfile::GetInstance().GetUserId();
     if (Id.empty()) {
         Log::Logger::GetInstance().Warning("[OrbitUser] No user id set, generating fake one");
         Id = "orbit-user-" + std::to_string(static_cast<int>(reinterpret_cast<intptr_t>(&Id)));

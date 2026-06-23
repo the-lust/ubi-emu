@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Common/Types.hpp"
+#include <windows.h>
 
 namespace Uues::Core::Memory {
 

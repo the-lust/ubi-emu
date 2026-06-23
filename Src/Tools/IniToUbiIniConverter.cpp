@@ -16,10 +16,10 @@ const static std::unordered_map<Common::String, Common::String> sKeyMap = {
     { "dlc",        "content_ids" },
 };
 
-bool IniToUbiIniConverter::Convert(const Core::Ini::IniParser& Source, Core::Ini::IniParser& Output) {
+bool IniToUbiIniConverter::Convert(const Ini::IniParser& Source, Ini::IniParser& Output) {
     Log::Logger::GetInstance().Info("[Converter] Starting generic -> UbiIni conversion");
 
-    Output.AddSection("UbiIni");
+    Output.AddSection(Ini::IniSection("UbiIni"));
     for (auto& Name : Source.GetSectionNames()) {
         if (Name == "Settings" || Name == "General") {
             auto& Sec = Source.GetSection(Name);
@@ -39,7 +39,7 @@ bool IniToUbiIniConverter::Convert(const Core::Ini::IniParser& Source, Core::Ini
     return true;
 }
 
-bool IniToUbiIniConverter::SaveToFile(const Core::Ini::IniParser& Parser, const Common::String& OutputPath) {
+bool IniToUbiIniConverter::SaveToFile(Ini::IniParser& Parser, const Common::String& OutputPath) {
     if (OutputPath.empty()) {
         Log::Logger::GetInstance().Error("[Converter] SaveToFile: empty output path");
         return false;

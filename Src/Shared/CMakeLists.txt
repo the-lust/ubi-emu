@@ -18,7 +18,7 @@ set(SHARED_HEADERS
 )
 
 add_library(EmuShared SHARED ${SHARED_SOURCES} ${SHARED_HEADERS})
-target_link_libraries(EmuShared PRIVATE LibUbi)
+target_link_libraries(EmuShared PRIVATE LibUbi EmuR1 EmuR2 EmuUPC EmuOrbit EmuDbData)
 
 # include current dir for header inter-dependencies
 target_include_directories(EmuShared PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

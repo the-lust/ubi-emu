@@ -4,6 +4,7 @@
 #include <atomic>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunThreadingTests() {
     Log::Logger::GetInstance().Info("[ThreadingTests] Starting");

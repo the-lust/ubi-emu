@@ -4,11 +4,16 @@
 #include <stdexcept>
 #include <memory>
 
+#ifndef NT_SUCCESS
+#define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
+#endif
+
 #pragma comment(lib, "bcrypt.lib")
 
 namespace Uues::Core::Crypto {
 
-struct AesEncryptor::Impl {
+class AesEncryptor::Impl {
+public:
     BCRYPT_ALG_HANDLE AlgHandle = nullptr;
     BCRYPT_KEY_HANDLE KeyHandle = nullptr;
     Common::ByteArray Key;
@@ -56,7 +61,7 @@ Common::ByteArray AesEncryptor::Encrypt(const Common::ByteArray& Data) {
     BCryptSetProperty(mImpl->AlgHandle, BCRYPT_CHAINING_MODE,
                       reinterpret_cast<PUCHAR>(const_cast<wchar_t*>(L"ECB")),
                       sizeof(L"ECB"), 0);
-    Dword ResultSize = 0;
+    ULONG ResultSize = 0;
     // query output size first (two-call pattern typical of BCrypt)
     BCryptEncrypt(mImpl->KeyHandle, const_cast<PUCHAR>(Data.data()),
                   static_cast<ULONG>(Data.size()), nullptr,
@@ -72,7 +77,7 @@ Common::ByteArray AesEncryptor::Decrypt(const Common::ByteArray& Data) {
     BCryptSetProperty(mImpl->AlgHandle, BCRYPT_CHAINING_MODE,
                       reinterpret_cast<PUCHAR>(const_cast<wchar_t*>(L"ECB")),
                       sizeof(L"ECB"), 0);
-    Dword ResultSize = 0;
+    ULONG ResultSize = 0;
     BCryptDecrypt(mImpl->KeyHandle, const_cast<PUCHAR>(Data.data()),
                   static_cast<ULONG>(Data.size()), nullptr,
                   nullptr, 0, nullptr, 0, &ResultSize, 0);
@@ -87,7 +92,7 @@ Common::ByteArray AesEncryptor::EncryptCbc(const Common::ByteArray& Data) {
     BCryptSetProperty(mImpl->AlgHandle, BCRYPT_CHAINING_MODE,
                       reinterpret_cast<PUCHAR>(const_cast<wchar_t*>(L"CBC")),
                       sizeof(L"CBC"), 0);
-    Dword ResultSize = 0;
+    ULONG ResultSize = 0;
     BCryptEncrypt(mImpl->KeyHandle, const_cast<PUCHAR>(Data.data()),
                   static_cast<ULONG>(Data.size()), nullptr,
                   mImpl->Iv.data(), static_cast<ULONG>(mImpl->Iv.size()),
@@ -104,7 +109,7 @@ Common::ByteArray AesEncryptor::DecryptCbc(const Common::ByteArray& Data) {
     BCryptSetProperty(mImpl->AlgHandle, BCRYPT_CHAINING_MODE,
                       reinterpret_cast<PUCHAR>(const_cast<wchar_t*>(L"CBC")),
                       sizeof(L"CBC"), 0);
-    Dword ResultSize = 0;
+    ULONG ResultSize = 0;
     BCryptDecrypt(mImpl->KeyHandle, const_cast<PUCHAR>(Data.data()),
                   static_cast<ULONG>(Data.size()), nullptr,
                   mImpl->Iv.data(), static_cast<ULONG>(mImpl->Iv.size()),

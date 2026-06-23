@@ -4,6 +4,7 @@
 #include <cassert>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunProtoTests() {
     Log::Logger::GetInstance().Info("[ProtoTests] Starting");
@@ -11,11 +12,10 @@ bool RunProtoTests() {
     int Total = 0;
     int Passed = 0;
 
-    // ProtobufSerializer create/destroy
+    // ProtobufSerializer static methods
     {
-        auto& S = Core::Proto::ProtobufSerializer::GetInstance();
+        auto Serialized = Core::Proto::ProtobufSerializer::SerializeMessage({});
         Total++;
-        // just verify it doesn't crash
         Passed++;
     }
 

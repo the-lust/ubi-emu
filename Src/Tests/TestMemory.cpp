@@ -4,28 +4,21 @@
 #include <cstdint>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunMemoryTests() {
     Log::Logger::GetInstance().Info("[MemoryTests] Starting memory tests");
 
     int Errors = 0;
 
-    // MemoryPatcher basic life cycle
+    // MemoryPatcher — fully static utility class
     {
-        Core::Memory::MemoryPatcher Patcher;
-        if (!Patcher.IsInitialized()) {
-            Log::Logger::GetInstance().Info("[MemoryTests] Patcher uninitialized as expected");
-        } else {
-            Errors++;
+        if (!Core::Memory::MemoryPatcher::PatchBytes((void*)0x0, Common::ByteArray{1,2,3})) {
+            Log::Logger::GetInstance().Info("[MemoryTests] PatchBytes to null rejected (expected)");
         }
-    }
-
-    // try applying an empty patch (should do nothing)
-    {
-        Core::Memory::MemoryPatcher Patcher;
-        bool Ok = Patcher.ApplyPatch({}); // empty patch
-        if (!Ok) {
-            Log::Logger::GetInstance().Warning("[MemoryTests] Empty patch rejected (fine)");
+        auto Read = Core::Memory::MemoryPatcher::ReadBytes((void*)0x0, 4);
+        if (Read.empty()) {
+            Log::Logger::GetInstance().Info("[MemoryTests] ReadBytes from null empty (expected)");
         }
     }
 

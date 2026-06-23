@@ -54,7 +54,7 @@ int UPLAY_USER_GetCredentials(char* Buffer, unsigned int BufferSize) {
     return 1;
 }
 
-int UPLAY_ACH_GetAchievement(char* AchId, int* OutUnlocked) {
+int UPLAY_ACH_GetAchievement([[maybe_unused]] char* AchId, int* OutUnlocked) {
     if (OutUnlocked) *OutUnlocked = 0;
     return 0; // not implemented - achievements always locked
 }
@@ -65,26 +65,26 @@ int UPLAY_ACH_SetAchievement(char* AchId) {
     return 1;
 }
 
-int UPLAY_ACH_ResetAchievement(char* AchId) {
+int UPLAY_ACH_ResetAchievement([[maybe_unused]] char* AchId) {
     return 1;
 }
 
-int UPLAY_DLC_IsInstalled(int DlcId, int* OutInstalled) {
+int UPLAY_DLC_IsInstalled([[maybe_unused]] int DlcId, int* OutInstalled) {
     if (OutInstalled) *OutInstalled = 1;
     return 1;
 }
 
-int UPLAY_DLC_GetList(int* OutDlcIds, unsigned int* OutCount) {
+int UPLAY_DLC_GetList([[maybe_unused]] int* OutDlcIds, unsigned int* OutCount) {
     if (OutCount) *OutCount = 0;
     return 1;
 }
 
-int UPLAY_SAVE_GetSaveGame(char* SaveName, void* Buffer, unsigned int* BufferSize) {
+int UPLAY_SAVE_GetSaveGame([[maybe_unused]] char* SaveName, [[maybe_unused]] void* Buffer, [[maybe_unused]] unsigned int* BufferSize) {
     // TODO: read from actual save directory
     return 0;
 }
 
-int UPLAY_SAVE_SetSaveGame(char* SaveName, void* Buffer, unsigned int BufferSize) {
+int UPLAY_SAVE_SetSaveGame([[maybe_unused]] char* SaveName, [[maybe_unused]] void* Buffer, [[maybe_unused]] unsigned int BufferSize) {
     // TODO: write to actual save directory
     return 1;
 }
@@ -100,7 +100,7 @@ int UPLAY_AVATAR_GetAvatarIdForCurrentUser(char* OutAvatarId, unsigned int Buffe
     return 1;
 }
 
-int UPLAY_AVATAR_GetBitmap(char* AvatarId, void* OutBitmap, unsigned int* OutSize) {
+int UPLAY_AVATAR_GetBitmap([[maybe_unused]] char* AvatarId, [[maybe_unused]] void* OutBitmap, [[maybe_unused]] unsigned int* OutSize) {
     return 0;
 }
 
@@ -110,9 +110,9 @@ int UPLAY_FRIENDS_GetCount(unsigned int* OutCount) {
     return 1;
 }
 
-int UPLAY_RICHPRESENCE_SetPresence(char* Presence) { return 1; } // silently ignored
+int UPLAY_RICHPRESENCE_SetPresence([[maybe_unused]] char* Presence) { return 1; } // silently ignored
 
-int UPLAY_SetGameSession(unsigned int SessionId) { return 1; }
+int UPLAY_SetGameSession([[maybe_unused]] unsigned int SessionId) { return 1; }
 int UPLAY_ClearGameSession() { return 1; }
 
 } // extern "C"

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Core/Common/Types.hpp"
+
 namespace Uues::EmuDbData {
 
 class DbDataInitHandler {
@@ -10,7 +12,7 @@ public:
 
 private:
     static bool mInitialized;
-    static Core::Common::String mConfigString;
+    static Uues::Core::Common::String mConfigString;
 };
 
 } // namespace Uues::EmuDbData

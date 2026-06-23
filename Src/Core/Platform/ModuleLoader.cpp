@@ -1,5 +1,12 @@
 #include "ModuleLoader.hpp"
+#include "../Common/StringUtils.hpp"
 #include <windows.h>
+#ifdef LoadLibrary
+#undef LoadLibrary
+#endif
+#ifdef GetModuleHandle
+#undef GetModuleHandle
+#endif
 
 namespace Uues::Core::Platform {
 

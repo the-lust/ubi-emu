@@ -5,6 +5,7 @@
 #include <vector>
 #include <array>
 #include <memory>
+#include <span>
 
 namespace Uues::Core::Common {
 
@@ -21,6 +22,24 @@ using WString = std::wstring;
 using StringList = std::vector<String>;
 
 using Guid = std::array<Byte, 16>;
+
+} // namespace Uues::Core::Common
+
+// Bring common types into Core namespace for convenient access from sub-namespaces
+namespace Uues::Core {
+    using Common::Byte;
+    using Common::Word;
+    using Common::Dword;
+    using Common::Qword;
+    using Common::ByteArray;
+    using Common::ByteSpan;
+    using Common::String;
+    using Common::WString;
+    using Common::StringList;
+    using Common::Guid;
+}
+
+namespace Uues::Core::Common {
 
 struct Version {
     Dword Major;

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../Common/Types.hpp"
+#include "../Common/StringUtils.hpp"
+#include <windows.h>
 
 namespace Uues::Core::Platform {
 

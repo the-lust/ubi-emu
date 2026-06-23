@@ -14,7 +14,7 @@ bool OrbitLoader::Initialize() {
     Log::Logger::GetInstance().Info("[OrbitLoader] Initializing Orbit Emulator (v" + GetVersion() + ")");
 
     // verify config path exists, or use fallback
-    if (!mConfigPath.empty() && !FileUtils::FileExists(mConfigPath)) {
+    if (!mConfigPath.empty() && !Common::FileUtils::Exists(mConfigPath)) {
         Log::Logger::GetInstance().Warning("[OrbitLoader] Config not found at '" +
             mConfigPath + "', will try defaults");
     }

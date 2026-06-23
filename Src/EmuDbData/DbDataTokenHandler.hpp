@@ -10,15 +10,15 @@ class DbDataTokenHandler {
 public:
     static DbDataTokenHandler& GetInstance();
 
-    void SetToken(const Core::Common::String& TokenType, const Common::ByteArray& TokenData);
-    Common::ByteArray GetToken(const Core::Common::String& TokenType) const;
+    void SetToken(const Core::Common::String& TokenType, const Uues::Core::Common::ByteArray& TokenData);
+    Uues::Core::Common::ByteArray GetToken(const Core::Common::String& TokenType) const;
     bool LoadFromFile(const Core::Common::String& Path);
     bool SaveToFile(const Core::Common::String& Path) const;
 
 private:
     DbDataTokenHandler() = default;
     DbDataTokenHandler(const DbDataTokenHandler&) = delete;
-    std::unordered_map<Core::Common::String, Common::ByteArray> mTokens;
+    std::unordered_map<Core::Common::String, Uues::Core::Common::ByteArray> mTokens;
 };
 
 } // namespace Uues::EmuDbData

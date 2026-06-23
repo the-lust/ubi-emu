@@ -60,7 +60,7 @@ bool EmulatorBase::OnShutdown() {
     Log::Logger::GetInstance().Warning("[EmuBase] OnShutdown not implemented — using default (no-op)");
     return true;
 }
-bool EmulatorBase::OnLoadConfig(const Core::Ini::IniParser& Parser) {
+bool EmulatorBase::OnLoadConfig([[maybe_unused]] const Ini::IniParser& Parser) {
     // default: config already loaded into mConfig, nothing extra needed
     return true;
 }

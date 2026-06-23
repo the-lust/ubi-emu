@@ -9,7 +9,7 @@ bool MemoryPatcher::PatchBytes(void* Address, const Common::ByteArray& Bytes) {
 }
 
 bool MemoryPatcher::PatchBytes(uintptr_t Address, const Common::ByteArray& Bytes) {
-    Dword OldProtect;
+    DWORD OldProtect;
     if (!VirtualProtect(reinterpret_cast<void*>(Address), Bytes.size(),
                         PAGE_EXECUTE_READWRITE, &OldProtect)) {
         return false;

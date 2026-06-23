@@ -2,11 +2,19 @@
 #include "../Ini/IniParser.hpp"
 #include "../Common/FileUtils.hpp"
 #include "../Common/TimeUtils.hpp"
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif
 
 namespace Uues::Core::Storage {
 
 AchievementManager::AchievementManager() {}
 AchievementManager::~AchievementManager() = default;
+
+AchievementManager& AchievementManager::GetInstance() {
+    static AchievementManager Instance;
+    return Instance;
+}
 
 bool AchievementManager::Initialize(const Common::String& StoragePath) {
     mStoragePath = StoragePath;

@@ -3,6 +3,7 @@
 #include <cstdio>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunLoggerTests() {
     printf("[Logger] Tests start\n");

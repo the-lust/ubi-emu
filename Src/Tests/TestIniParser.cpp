@@ -5,6 +5,7 @@
 #include <cassert>
 
 namespace Uues::Tests {
+using namespace Uues::Core;
 
 bool RunIniParserTests() {
     Log::Logger::GetInstance().Info("[IniParserTests] Starting");

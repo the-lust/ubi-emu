@@ -33,7 +33,7 @@ bool MemoryAllocator::Free(void* Address) {
 }
 
 bool MemoryAllocator::Protect(void* Address, size_t Size, Dword NewProtection, Dword* OldProtection) {
-    Dword Old;
+    DWORD Old;
     bool Result = VirtualProtect(Address, Size, NewProtection, &Old) != 0;
     if (OldProtection) *OldProtection = Old;
     return Result;

@@ -25,7 +25,7 @@ int main() {
     if (!R1) { Fail("CreateR1", "nullptr"); return 1; }
     Pass("CreateR1");
 
-    Pass("Name is '" + R1->GetName() + "'");
+    Pass(("Name is '" + R1->GetName() + "'").c_str());
 
     if (!R1->Initialize()) { Fail("Initialize", "returned false"); return 1; }
     Pass("Initialize");
