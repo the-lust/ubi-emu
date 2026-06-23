@@ -1,0 +1,48 @@
+# Build
+Build/
+Build_*/
+build/
+out/
+x64/
+x86/
+Debug/
+Release/
+RelWithDebInfo/
+MinSizeRel/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.sln
+*.suo
+*.user
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+cmake-build-*/
+
+# Compiled
+*.obj
+*.o
+*.lib
+*.dll
+*.exe
+*.pdb
+*.exp
+*.ilk
+*.dylib
+*.so
+*.a
+
+# Logs
+*.log
+Logs/
+
+# Temp
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

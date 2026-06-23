@@ -1,0 +1,1 @@
+You need LLVM and Clang 15 or newer because that is where C++20 support for things like format and span actually works. CMake 3.20 and Ninja are the other pieces. From the UUES root run cmake -B Build -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release then cmake --build Build. If you try an older Clang the core library will not compile.

@@ -1,0 +1,32 @@
+name: Build Clang/LLVM
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup LLVM/Clang
+      uses: egor-tensin/setup-clang@v1
+      with:
+        version: 17
+        platform: x64
+
+    - name: Configure CMake
+      run: cmake -B Build -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build Build
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: UUES-Clang-x64
+        path: Build/Bin/
